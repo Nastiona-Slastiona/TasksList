@@ -29,3 +29,18 @@
 .separator {
   margin: 15px 0;
 }
+
+.post-enter {
+  opacity: 0;
+}
+.post-enter-active {
+  opacity: 1;
+  transition: opacity 200ms ease-in;
+}
+.post-exit {
+  opacity: 1;
+}
+.post-exit-active {
+  opacity: 0;
+  transition: opacity 200ms ease-in;
+}
