@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import  './styles/App.css';
-import TaskList from './components/TaskList';
-import TaskForm from './components/TaskForm';
+import TaskList from './components/tasks/TaskList';
+import TaskForm from './components/tasks/TaskForm';
 import TaskFilter from './components/TaskFilter';
 import ModalWindow from './components/UI/ModalWindow/ModalWindow';
 import StyledButton from './components/UI/button/StyledButton';

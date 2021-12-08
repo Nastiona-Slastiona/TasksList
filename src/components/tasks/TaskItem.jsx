@@ -1,5 +1,5 @@
 import React from "react";
-import StyledButton from "./UI/button/StyledButton";
+import StyledButton from "../UI/button/StyledButton";
 
 const TaskItem = (props) => {
     return (

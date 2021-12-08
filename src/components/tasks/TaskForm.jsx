@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import StyledButton from './UI/button/StyledButton';
-import StyledInput from './UI/input/StyledInput';
+import StyledButton from '../UI/button/StyledButton';
+import StyledInput from '../UI/input/StyledInput';
 
 const TaskForm = ({create}) => {
 
