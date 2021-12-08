@@ -1,36 +1,48 @@
 import React, { useState } from 'react';
 import StyledButton from '../UI/button/StyledButton';
 import StyledInput from '../UI/input/StyledInput';
+import { useDispatch } from 'react-redux';
+import { nanoid } from '@reduxjs/toolkit';
+import { taskAdded } from '../../features/tasks/tasksSlice';
 
-const TaskForm = ({create}) => {
+const TaskForm = () => {
+      const [task, setTask] = useState({title: '', body: ''});
 
-      const [task, setTask] = useState({title: '', body: ''})
-      const addNewTask = (event) => {
+      const dispatch = useDispatch();
+
+      const onTitleChanged = e => setTask({...task, title: e.target.value})
+      const onBodyChanged = e => setTask({...task, body: e.target.value})
+
+      const onAddNewTask = (event) => {
         event.preventDefault();
-        const newTask = {
-            ...task, id: Date.now()
+        if(task.title && task.body) {
+            dispatch(
+                taskAdded({
+                    id: nanoid(),
+                    ...task  
+                })
+            )
+        };
 
-        }
-        create(newTask);
         setTask({title: '', body: ''})
-      }
+    };
+
     return (
         <form>
             <StyledInput
                 value={task.title} 
-                onChange={event => setTask( {...task, title: event.target.value} )}
+                onChange={onTitleChanged}
                 type='text' 
                 placeholder='Task Name'
             />
             <StyledInput 
                 value={task.body} 
-                onChange={event => setTask( {...task, body: event.target.value} )}
+                onChange={onBodyChanged}
                 type='text' 
                 placeholder='Task Description'
             />
-            <StyledButton onClick={addNewTask}>Add Task</StyledButton>
+            <StyledButton onClick={onAddNewTask}>Add Task</StyledButton>
         </form>
-    
     );
 
 };

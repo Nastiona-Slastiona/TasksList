@@ -1,6 +1,6 @@
 import React from "react";
-import StyledInput from "./UI/input/StyledInput";
-import Selector from "./UI/select/Selector";
+import StyledInput from "../UI/input/StyledInput";
+import Selector from "../UI/select/Selector";
 
 const TaskFilter = ({filter, setFilter}) => {
     return (
