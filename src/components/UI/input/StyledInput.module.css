@@ -4,3 +4,8 @@
   margin: 5px 0;
   border: 1px solid teal;
 }
+.styledInputCheckbox {
+  width: 30px;
+  height: 30px;
+  margin: 0 10px;
+}

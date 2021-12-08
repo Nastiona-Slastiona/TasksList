@@ -2,6 +2,7 @@ import React from "react";
 import StyledButton from "../UI/button/StyledButton";
 import { useDispatch } from "react-redux";
 import { taskRemoved } from "../../features/tasks/tasksSlice";
+import StyledInputCheckbox from "../UI/input/StyledInputCheckbox";
 
 const TaskItem = (props) => {
   const dispatch = useDispatch();
@@ -20,8 +21,8 @@ const TaskItem = (props) => {
           {props.task.body}
         </div>
       </div>
-      <div className="task_button-list">
-        <input type="checkbox"/>
+      <div className="task__button-list">
+        <StyledInputCheckbox state={props}/>
         <StyledButton onClick={onDeleteClick}>Delete</StyledButton>
       </div>
 
