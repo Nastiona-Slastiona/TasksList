@@ -1,9 +1,9 @@
 import React from "react";
-import PostItem from "./PostItem";
+import TaskItem from "./TaskItem";
 import {TransitionGroup, CSSTransition} from "react-transition-group";
 
-const PostList = ({posts, title, remove}) => {
-    if(!posts.length){
+const TaskList = ({tasks, title, remove}) => {
+    if(!tasks.length){
         return (
             <h1 className="list-header">There is nothing</h1>
         );
@@ -12,13 +12,13 @@ const PostList = ({posts, title, remove}) => {
         <div>
             <h1 className='list-header'>{title}</h1>
             <TransitionGroup>
-                {posts.map((post, index) =>
+                {tasks.map((task, index) =>
                      <CSSTransition
-                        key={post.id}
+                        key={task.id}
                         timeout={500}
-                        classNames="post"
+                        classNames="task"
                     >
-                    <PostItem remove={remove} number={index + 1} post={post} key={post.id}/>
+                    <TaskItem remove={remove} number={index + 1} task={task} key={task.id}/>
                     </CSSTransition>
                 )}
             </TransitionGroup>
@@ -27,4 +27,4 @@ const PostList = ({posts, title, remove}) => {
 
 };
 
-export default PostList;
+export default TaskList;

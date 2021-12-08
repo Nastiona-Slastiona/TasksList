@@ -13,7 +13,7 @@
   width: 800px;
 }
 
-.post {
+.task {
   display: flex;
   padding: 15px;
   border: 2px solid teal;
@@ -30,17 +30,17 @@
   margin: 15px 0;
 }
 
-.post-enter {
+.task-enter {
   opacity: 0;
 }
-.post-enter-active {
+.task-enter-active {
   opacity: 1;
   transition: opacity 200ms ease-in;
 }
-.post-exit {
+.task-exit {
   opacity: 1;
 }
-.post-exit-active {
+.task-exit-active {
   opacity: 0;
   transition: opacity 200ms ease-in;
 }

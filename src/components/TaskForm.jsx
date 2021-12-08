@@ -4,31 +4,31 @@ import StyledInput from './UI/input/StyledInput';
 
 const TaskForm = ({create}) => {
 
-      const [post, setPost] = useState({title: '', body: ''})
-      const addNewPost = (event) => {
+      const [task, setTask] = useState({title: '', body: ''})
+      const addNewTask = (event) => {
         event.preventDefault();
-        const newPost = {
-            ...post, id: Date.now()
+        const newTask = {
+            ...task, id: Date.now()
 
         }
-        create(newPost);
-        setPost({title: '', body: ''})
+        create(newTask);
+        setTask({title: '', body: ''})
       }
     return (
         <form>
             <StyledInput
-                value={post.title} 
-                onChange={event => setPost( {...post, title: event.target.value} )}
+                value={task.title} 
+                onChange={event => setTask( {...task, title: event.target.value} )}
                 type='text' 
-                placeholder='Post Name'
+                placeholder='Task Name'
             />
             <StyledInput 
-                value={post.body} 
-                onChange={event => setPost( {...post, body: event.target.value} )}
+                value={task.body} 
+                onChange={event => setTask( {...task, body: event.target.value} )}
                 type='text' 
-                placeholder='Post Description'
+                placeholder='Task Description'
             />
-            <StyledButton onClick={addNewPost}>Add Post</StyledButton>
+            <StyledButton onClick={addNewTask}>Add Task</StyledButton>
         </form>
     
     );
