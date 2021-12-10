@@ -7,22 +7,38 @@ import ModalWindow from './components/UI/ModalWindow/ModalWindow';
 import StyledButton from './components/UI/button/StyledButton';
 import { useSelector } from "react-redux";
 
-
 function App() {
-  const tasks = useSelector(state => state.tasks.toDoActions);
+  const tasks = useSelector(state => state.tasks.tasksToDo);
+  const filterStatus = useSelector(state => state.tasks.filter.status);
   const [filter, setFilter] = useState({selectedSort:'', searchQuery: ''});
   const [modal, setModal] = useState(false);
+
+  const getVisibleTodos = (todos, filter) => {
+    switch(filter) {
+        case 'active':
+            return todos.filter(t => !t.completed);
+        case 'completed':
+            return todos.filter(t => t.completed);
+        default:
+            return todos;
+    }
+  };
+  
+  const visibleTodos = getVisibleTodos(tasks, filterStatus);
 
   const sortedTasks = useMemo(() => {
       console.log('GET SORTED TASKS');
       if(filter.selectedSort) {
-        return [...tasks].sort((a, b) => a[filter.selectedSort].localeCompare(b[filter.selectedSort]));
+        return [...visibleTodos].sort((a, b) => a[filter.selectedSort].localeCompare(b[filter.selectedSort]));
       }
-      return tasks;
-  },  [filter.selectedSort, tasks]);
+      return visibleTodos;
+  },  [filter.selectedSort,visibleTodos]);
 
   const sortedAndSearchedTasks = useMemo(() => {
-    return sortedTasks.filter(task => task.title.toLowerCase().includes(filter.searchQuery.toLowerCase()));
+    return sortedTasks
+      .filter(task => task.title
+        .toLowerCase()
+        .includes(filter.searchQuery.toLowerCase()));
   }, [filter.searchQuery, sortedTasks]);
 
   return (

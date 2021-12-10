@@ -1,6 +1,7 @@
 import React from "react";
 import StyledInput from "../UI/input/StyledInput";
 import Selector from "../UI/select/Selector";
+import TaskStatusFilter from "./TaskStatusFilter";
 
 const TaskFilter = ({filter, setFilter}) => {
     return (
@@ -18,6 +19,7 @@ const TaskFilter = ({filter, setFilter}) => {
                     {value: 'body', name:'by description'}
                 ]}
             />
+            <TaskStatusFilter/>
         </div>
     )
 };
