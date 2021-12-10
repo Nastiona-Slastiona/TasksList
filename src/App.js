@@ -6,15 +6,16 @@ import TaskFilter from './components/tasks/TaskFilter';
 import ModalWindow from './components/UI/ModalWindow/ModalWindow';
 import StyledButton from './components/UI/button/StyledButton';
 import { useSelector } from "react-redux";
+import { selectAllTasks } from './features/tasks/tasksSlice'
 
 function App() {
-  const tasks = useSelector(state => state.tasks.tasksToDo);
+  const tasks = useSelector(selectAllTasks);
   const filterStatus = useSelector(state => state.tasks.filter.status);
   const [filter, setFilter] = useState({selectedSort:'', searchQuery: ''});
   const [modal, setModal] = useState(false);
 
-  const getVisibleTodos = (todos, filter) => {
-    switch(filter) {
+  const getVisibleTodos = (todos, taskFilter) => {
+    switch(taskFilter) {
         case 'active':
             return todos.filter(t => !t.completed);
         case 'completed':

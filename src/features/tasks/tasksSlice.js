@@ -1,18 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
-import filtersReducer from "../filters/filtersSlice";
 
-export const StatusFilters = {
+const StatusFilters = {
     All: 'all',
     Active: 'active',
     Completed: 'completed'
 };
 
+const StatusAPI = {
+    IDLE: 'idle',
+
+};
+
 const initialState = {
     tasksToDo : [
-        {id:1, title: 'JavaScript', body: 'JavaScript - programming language', completed: true },
-        {id:2, title: 'JavaScript2', body: 'JavaScript - programming language', completed: false, color: 'blue' },
-        {id:3, title: 'JavaScript3', body: 'JavaScript - programming language', completed: false, color: 'orange' },
+        // {id:1, title: 'JavaScript', body: 'JavaScript - programming language', completed: true },
+        // {id:2, title: 'JavaScript2', body: 'JavaScript - programming language', completed: false, color: 'blue' },
+        // {id:3, title: 'JavaScript3', body: 'JavaScript - programming language', completed: false, color: 'orange' },
     ],
+    status: StatusAPI.IDLE,
+    error: null,
     filter: {
         status: StatusFilters.All,
         colors: []
@@ -57,11 +63,12 @@ const tasksSlice = createSlice({
                     status: action.payload,
                 }
             }
-        },
-        filtersReducer
+        }
     }
 });
 
 export const { taskAdded, taskRemoved, taskToggled, statusFilterChanged } = tasksSlice.actions;
 
 export default tasksSlice.reducer;
+
+export const selectAllTasks = state => state.tasks.tasksToDo;

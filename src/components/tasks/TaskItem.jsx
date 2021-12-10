@@ -15,15 +15,16 @@ const TaskItem = ({task, number}) => {
 
   return (
       <div className="task">
-      <div className="task__content">
-        <strong 
-        style={{
-          textDecoration: task.completed 
-          ? 'line-through': 'none',
-          color: task.color  
-        }}
-        >
-          {number}. {task.title}</strong>
+        <div className="task__content">
+          <strong 
+            style={{
+              textDecoration: task.completed 
+              ? 'line-through': 'none',
+              color: task.color  
+            }}
+          >
+            {number}. {task.title}
+          </strong>
         <div>
           {task.body}
         </div>

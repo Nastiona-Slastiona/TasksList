@@ -7,7 +7,7 @@ const FilterButton = ({status, children}) => {
         const dispatch = useDispatch();
 
         const onFilterButtonClick = () => dispatch(
-            statusFilterChanged(status)
+           statusFilterChanged(status)
         );
 
         return (
