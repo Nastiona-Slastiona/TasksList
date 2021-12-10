@@ -3,7 +3,7 @@ import TaskItem from "./TaskItem";
 import {TransitionGroup, CSSTransition} from "react-transition-group";
 
 
-const TaskList = ({tasks, title, remove}) => {    
+const TaskList = ({tasks, title}) => {    
     if(!tasks.length){
         return (
             <h1 className="list-header">There is nothing</h1>
@@ -16,7 +16,7 @@ const TaskList = ({tasks, title, remove}) => {
             timeout={500}
             classNames="task"
         >
-            <TaskItem remove={remove} number={index + 1} task={task} key={task.id}/>
+            <TaskItem number={index + 1} task={task} key={task.id}/>
         </CSSTransition>
     ))
 

@@ -25,10 +25,6 @@ function App() {
     return sortedTasks.filter(task => task.title.toLowerCase().includes(filter.searchQuery.toLowerCase()));
   }, [filter.searchQuery, sortedTasks]);
 
-  // const removeTask = (tasks) => {
-  //   setTasks(tasks.filter(t => t.id !== task.id));
-  // }
-
   return (
     <div className="App">
       <StyledButton style={{marginTop: 30}} onClick={() => setModal(true) }>Create task</StyledButton>

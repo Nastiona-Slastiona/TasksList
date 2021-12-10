@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     toDoActions : [
-        {id:1, title: 'JavaScript1', body: 'JavaScript - programming language', completed: true },
+        {id:1, title: 'JavaScript', body: 'JavaScript - programming language', completed: true },
         {id:2, title: 'JavaScript2', body: 'JavaScript - programming language', completed: false, color: 'blue' },
-        {id:3, title: 'JavaScript3', body: 'JavaScript - programming language', completed: false, color: 'blue' },
+        {id:3, title: 'JavaScript3', body: 'JavaScript - programming language', completed: false, color: 'orange' },
     ],
     filters: {
         status: 'All',

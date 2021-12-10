@@ -4,25 +4,32 @@ import { useDispatch } from "react-redux";
 import { taskRemoved } from "../../features/tasks/tasksSlice";
 import StyledInputCheckbox from "../UI/input/StyledInputCheckbox";
 
-const TaskItem = (props) => {
+const TaskItem = ({task, number}) => {
   const dispatch = useDispatch();
 
-  const onDeleteClick = (event) => {
+  const onDeleteClick = event => {
     event.preventDefault();
     dispatch(
-      taskRemoved(props.task)
+      taskRemoved(task)
   )};
 
   return (
       <div className="task">
       <div className="task__content">
-        <strong>{props.number}. {props.task.title}</strong>
+        <strong 
+        style={{
+          textDecoration: task.completed 
+          ? 'line-through': 'none',
+          color: task.color  
+        }}
+        >
+          {number}. {task.title}</strong>
         <div>
-          {props.task.body}
+          {task.body}
         </div>
       </div>
       <div className="task__button-list">
-        <StyledInputCheckbox state={props}/>
+        <StyledInputCheckbox task={task}/>
         <StyledButton onClick={onDeleteClick}>Delete</StyledButton>
       </div>
 

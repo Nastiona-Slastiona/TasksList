@@ -21,7 +21,7 @@ const TaskForm = () => {
                     id: nanoid(),
                     ...task  
                 })
-            )
+            ) 
         };
 
         setTask({title: '', body: ''})
