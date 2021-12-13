@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import StyledButton from '../UI/button/StyledButton.js';
-import StyledInput from '../UI/input/StyledInput.js';
+import StyledButton from '../UI/Button/styledButton.js';
+import StyledInput from '../UI/Input/styledInput.js';
 import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 import { taskAdded } from '../../features/tasks/tasksSlice.js';

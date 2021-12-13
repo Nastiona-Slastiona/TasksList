@@ -1,5 +1,5 @@
 import React from "react";
-import TaskItem from "./TaskItem.js";
+import TaskItem from "../taskItem/taskItem.js";
 import {TransitionGroup, CSSTransition} from "react-transition-group";
 
 

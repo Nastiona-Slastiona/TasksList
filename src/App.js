@@ -1,12 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import  './styles/App.css';
-import TaskList from './components/tasks/TaskList.js';
-import TaskForm from './components/tasks/TaskForm.js';
-import TaskFilter from './components/tasks/TaskFilter.js';
-import ModalWindow from './components/UI/ModalWindow/ModalWindow.js';
-import StyledButton from './components/UI/button/StyledButton.js';
+import TaskList from './components/TaskList/taskList.js';
+import TaskForm from './components/TaskForm/taskForm.js/index.js';
+import TaskFilter from './components/TaskFilter/taskFilter.js';
+import ModalWindow from './components/UI/ModalWindow/modalWindow.js';
+import StyledButton from './components/UI/Button/styledButton.js';
 import { useSelector } from "react-redux";
-import { selectAllTasks } from './features/tasks/tasksSlice.js'
+import { selectAllTasks } from './features/Tasks/tasksSlice.js'
 
 function App() {
   const tasks = useSelector(selectAllTasks);
