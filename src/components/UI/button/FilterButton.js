@@ -1,7 +1,7 @@
 import React from "react";
 import classes from './StyledButton.module.css';
 import { useDispatch } from "react-redux";
-import { statusFilterChanged } from "../../../features/tasks/tasksSlice";
+import { statusFilterChanged } from "../../../features/tasks/tasksSlice.js";
 
 const FilterButton = ({status, children}) => {
         const dispatch = useDispatch();

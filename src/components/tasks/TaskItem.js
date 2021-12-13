@@ -1,8 +1,8 @@
 import React from "react";
-import StyledButton from "../UI/button/StyledButton";
+import StyledButton from "../UI/button/StyledButton.js";
 import { useDispatch } from "react-redux";
-import { taskRemoved } from "../../features/tasks/tasksSlice";
-import StyledInputCheckbox from "../UI/input/StyledInputCheckbox";
+import { taskRemoved } from "../../features/tasks/tasksSlice.js";
+import StyledInputCheckbox from "../UI/input/StyledInputCheckbox.js";
 
 const TaskItem = ({task, number}) => {
   const dispatch = useDispatch();

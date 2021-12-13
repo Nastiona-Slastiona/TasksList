@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import StyledButton from '../UI/button/StyledButton';
-import StyledInput from '../UI/input/StyledInput';
+import StyledButton from '../UI/button/StyledButton.js';
+import StyledInput from '../UI/input/StyledInput.js';
 import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
-import { taskAdded } from '../../features/tasks/tasksSlice';
+import { taskAdded } from '../../features/tasks/tasksSlice.js';
 
 const TaskForm = () => {
       const [task, setTask] = useState({title: '', body: ''});

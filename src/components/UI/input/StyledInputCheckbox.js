@@ -1,7 +1,7 @@
 import React from "react";
 import classes from './StyledInput.module.css';
 import { useDispatch } from "react-redux";
-import { taskToggled } from "../../../features/tasks/tasksSlice";
+import { taskToggled } from "../../../features/tasks/tasksSlice.js";
 
 const StyledInputCheckbox = ({task}) => {
     const dispatch = useDispatch();

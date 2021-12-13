@@ -1,5 +1,5 @@
 import React from "react";
-import FilterButton from "../UI/button/FilterButton";
+import FilterButton from "../UI/button/FilterButton.js";
 import cl from '../../styles/Task/task.module.css';
 
 
