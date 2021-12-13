@@ -13,9 +13,9 @@ const StatusAPI = {
 
 const initialState = {
     tasksToDo : [
-        // {id:1, title: 'JavaScript', body: 'JavaScript - programming language', completed: true },
-        // {id:2, title: 'JavaScript2', body: 'JavaScript - programming language', completed: false, color: 'blue' },
-        // {id:3, title: 'JavaScript3', body: 'JavaScript - programming language', completed: false, color: 'orange' },
+        {id:1, title: 'JavaScript', body: 'JavaScript - programming language', completed: true },
+        {id:2, title: 'JavaScript2', body: 'JavaScript - programming language', completed: false, color: 'blue' },
+        {id:3, title: 'JavaScript3', body: 'JavaScript - programming language', completed: false, color: 'orange' },
     ],
     status: StatusAPI.IDLE,
     error: null,
