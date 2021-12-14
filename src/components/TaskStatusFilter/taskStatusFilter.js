@@ -1,6 +1,6 @@
 import React from "react";
 import FilterButton from "../UI/Button/filterButton.js";
-import cl from '../../styles/Task/task.module.css';
+import cl from './taskStatusFilter.module.css';
 
 
 const TaskStatusFilter = () => {

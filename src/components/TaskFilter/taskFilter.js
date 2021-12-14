@@ -1,7 +1,7 @@
 import React from "react";
 import StyledInput from "../UI/Input/styledInput.js";
 import Selector from "../UI/Select/selector.js";
-import TaskStatusFilter from "../taskStatusFilter/taskStatusFilter.js";
+import TaskStatusFilter from "../TaskStatusFilter/taskStatusFilter.js";
 
 const TaskFilter = ({filter, setFilter}) => {
     return (
