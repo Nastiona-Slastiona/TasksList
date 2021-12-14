@@ -18,12 +18,11 @@ app.use(handleRender)
 
 function handleRender(req, res) {
     const params = qs.parse(req.query);
-    const tasks = parseInt(params.tasksToDo) || null ;
     const store = createStore(tasksReducer);
 
-    const preloadedState = { tasks };
+    // const preloadedState = { store.getS?tate };
 
-    const store = createStore(tasksReducer, preloadedState);
+    // const store = createStore(tasksReducer, preloadedState);
 
     const html = renderToString(
         <Provider store={store}>

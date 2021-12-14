@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const StatusFilters = {
     All: 'all',
@@ -6,24 +6,87 @@ const StatusFilters = {
     Completed: 'completed'
 };
 
-const StatusAPI = {
-    IDLE: 'idle',
-
-};
-
 const initialState = {
     tasksToDo : [
-        {id:1, title: 'JavaScript', body: 'JavaScript - programming language', completed: true },
-        {id:2, title: 'JavaScript2', body: 'JavaScript - programming language', completed: false, color: 'blue' },
-        {id:3, title: 'JavaScript3', body: 'JavaScript - programming language', completed: false, color: 'orange' },
+        // {id:1, title: 'JavaScript', body: 'JavaScript - programming language', completed: true },
+        // {id:2, title: 'JavaScript2', body: 'JavaScript - programming language', completed: false },
+        // {id:3, title: 'JavaScript3', body: 'JavaScript - programming language', completed: false },
     ],
-    status: StatusAPI.IDLE,
+    status: null,
     error: null,
     filter: {
         status: StatusFilters.All,
-        colors: []
     } 
 } ;
+
+export const fetchTasks = createAsyncThunk(
+    'tasks/fetchTasks',
+    async function(_, {rejectWithValue}) {
+        try {
+            const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=5');
+    
+            if (!response.ok) {
+                throw new Error('ServerError');
+            }
+    
+            const data = await response.json();
+    
+            return data;
+        } catch (error) {
+            return rejectWithValue(error.message)
+        }
+    }
+);
+
+export const deleteTasks = createAsyncThunk(
+    'tasks/deleteTasks',
+    async function(id, {rejectWithValue, dispatch}) {
+        try {
+            const response = await fetch('https://jsonplaceholder.typicode.com/todos/${id}', {
+                method: 'DELETE',
+            });
+    
+            if (!response.ok) {
+                throw new Error('ServerError on Delete');
+            }
+    
+            dispatch(taskRemoved({id}));
+        } catch (error) {
+            return rejectWithValue(error.message)
+        }
+    }
+);
+
+export const toggleTasks = createAsyncThunk(
+    'tasks/toggleTasks',
+    async function(todo, {rejectWithValue, dispatch, getState}) {
+        const task = getState().tasks.tasksToDo.find(t => t === todo);
+        try {
+            const response = await fetch('https://jsonplaceholder.typicode.com/todos/${id}', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    completed: !task.completed,
+                })
+            });
+    
+            if (!response.ok) {
+                throw new Error('ServerError on Toggle');
+            }
+
+            dispatch(taskToggled(task));
+        } catch (error) {
+            return rejectWithValue(error.message)
+        }
+    }
+);
+
+const setError = (state, action) => {
+    state.status = 'rejected';
+    state.error = action.payload;
+};
 
 const tasksSlice = createSlice({
     name: 'tasks',
@@ -64,6 +127,19 @@ const tasksSlice = createSlice({
                 }
             }
         }
+    },
+    extraReducers: {
+        [fetchTasks.pending]: (state) => {
+            state.status = 'loading';
+            state.error = null;
+        },
+        [fetchTasks.fulfilled]: (state, action) => {
+            state.status = 'resolved';
+            state.tasksToDo = action.payload;
+        },
+        [fetchTasks.rejected]: setError,
+        [deleteTasks.rejected]: setError,
+        [toggleTasks.rejected]: setError,
     }
 });
 

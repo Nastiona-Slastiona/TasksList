@@ -5,14 +5,17 @@ import TaskForm from './components/TaskForm/taskForm.js';
 import TaskFilter from './components/TaskFilter/taskFilter.js';
 import ModalWindow from './components/UI/ModalWindow/modalWindow.js';
 import StyledButton from './components/UI/Button/styledButton.js';
-import { useSelector } from "react-redux";
-import { selectAllTasks } from './features/Tasks/tasksSlice.js'
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetchTasks, selectAllTasks } from './features/Tasks/tasksSlice.js'
 
 function App() {
   const tasks = useSelector(selectAllTasks);
   const filterStatus = useSelector(state => state.tasks.filter.status);
+  const {status, error} = useSelector(state => state.tasks);
   const [filter, setFilter] = useState({selectedSort:'', searchQuery: ''});
   const [modal, setModal] = useState(false);
+  const dispatch = useDispatch();
 
   const getVisibleTodos = (todos, taskFilter) => {
     switch(taskFilter) {
@@ -42,6 +45,10 @@ function App() {
         .includes(filter.searchQuery.toLowerCase()));
   }, [filter.searchQuery, sortedTasks]);
 
+  useEffect(() => {
+    dispatch(fetchTasks());
+  }, [dispatch]);
+
   return (
     <div className="App">
       <StyledButton style={{marginTop: 30}} onClick={() => setModal(true) }>Create task</StyledButton>
@@ -53,6 +60,8 @@ function App() {
         filter={filter}
         setFilter={setFilter}  
       />
+      {status === 'loading' && <h2>Loading...</h2>}
+      {error && <h2>An error occured: {error}</h2>}
       <TaskList tasks={sortedAndSearchedTasks} title={'List of tasks'}/>
     </div>
   );
