@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
 
 const StatusFilters = {
     All: 'all',
@@ -18,6 +18,35 @@ const initialState = {
         status: StatusFilters.All,
     } 
 } ;
+
+export const addTask = createAsyncThunk(
+    'tasks/addTask',
+    async function(todo, {rejectWithValue, dispatch}) {
+        const task = {
+            ...todo,
+            completed: false
+        }
+        try {
+            const response = await fetch('https://jsonplaceholder.typicode.com/todos/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(task)
+            });
+    
+            if (!response.ok) {
+                throw new Error('ServerError on Adding task');
+            }
+
+            const data = await response.json();
+            dispatch(taskAdded(data));
+        } catch (error) {
+            return rejectWithValue(error.message)
+        }
+
+    }
+)
 
 export const fetchTasks = createAsyncThunk(
     'tasks/fetchTasks',
