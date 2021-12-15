@@ -4,6 +4,11 @@ import { useDispatch } from "react-redux";
 import { toggleTasks } from "../../../features/Tasks/tasksSlice.js";
 
 const StyledInputCheckbox = ({task}) => {
+    if (!task) {
+        return (
+            <div>There is an error in the 'Checkbox' section</div>
+        );
+    }
     const dispatch = useDispatch();
 
     const toggle = () => {

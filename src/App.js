@@ -19,22 +19,22 @@ function App() {
 
   const getVisibleTodos = (todos, taskFilter) => {
     switch(taskFilter) {
-        case 'active':
-            return todos.filter(t => !t.completed);
-        case 'completed':
-            return todos.filter(t => t.completed);
-        default:
-            return todos;
+      case 'active':
+          return todos.filter(t => !t.completed);
+      case 'completed':
+          return todos.filter(t => t.completed);
+      default:
+          return todos;
     }
   };
   
   const visibleTodos = getVisibleTodos(tasks, filterStatus);
 
   const sortedTasks = useMemo(() => {
-      console.log('GET SORTED TASKS');
       if(filter.selectedSort) {
         return [...visibleTodos].sort((a, b) => a[filter.selectedSort].localeCompare(b[filter.selectedSort]));
       }
+
       return visibleTodos;
   },  [filter.selectedSort,visibleTodos]);
 
@@ -51,7 +51,7 @@ function App() {
 
   return (
     <div className="App">
-      <CreateButton style={{marginTop: 30}} onClick={() => setModal(true) }>+</CreateButton>
+      <CreateButton onClick={() => setModal(true)}>+</CreateButton>
       <ModalWindow visible={modal} setVisible={setModal}>
         <TaskForm />
       </ModalWindow>
@@ -60,8 +60,8 @@ function App() {
         filter={filter}
         setFilter={setFilter}  
       />
-       <hr className="separator"/>
-      {status === 'loading' && <h2>Loading...</h2>}
+      <hr className="separator"/>
+      {status === 'loading' && <h2 className="list-header">Loading...</h2>}
       {error && <h2>An error occured: {error}</h2>}
       <TaskList tasks={sortedAndSearchedTasks} title={'List of tasks'}/>
     </div>

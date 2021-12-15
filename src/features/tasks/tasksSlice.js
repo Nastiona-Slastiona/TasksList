@@ -172,6 +172,7 @@ const tasksSlice = createSlice({
 });
 
 const {taskRemoved, taskAdded, taskToggled} = tasksSlice.actions;
+
 export const { statusFilterChanged } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

@@ -1,9 +1,15 @@
 import React from "react";
 import TaskItem from "../TaskItem/taskItem.js";
-import {TransitionGroup, CSSTransition} from "react-transition-group";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 
 const TaskList = ({tasks, title}) => {    
+    if(!tasks && !title) {
+        return (
+            <div>There is an error in th 'TaskList' section</div>
+        );
+    }
+
     if(!tasks.length){
         return (
             <h1 className="list-header">There is nothing</h1>

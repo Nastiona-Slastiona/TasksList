@@ -2,18 +2,17 @@ import React, { useState } from 'react';
 import StyledButton from '../UI/Button/styledButton.js';
 import StyledInput from '../UI/Input/styledInput.js';
 import { useDispatch } from 'react-redux';
-import { nanoid } from '@reduxjs/toolkit';
 import { addTask } from '../../features/Tasks/tasksSlice.js';
 
 const TaskForm = () => {
-      const [task, setTask] = useState({title: '', body: ''});
+    const [task, setTask] = useState({title: '', body: ''});
 
-      const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-      const onTitleChanged = e => setTask({...task, title: e.target.value})
-      const onBodyChanged = e => setTask({...task, body: e.target.value})
+    const onTitleChanged = e => setTask({...task, title: e.target.value})
+    const onBodyChanged = e => setTask({...task, body: e.target.value})
 
-      const onAddNewTask = (event) => {
+    const onAddNewTask = (event) => {
         event.preventDefault();
         if(task.title && task.body) {
             dispatch(
@@ -41,7 +40,6 @@ const TaskForm = () => {
             <StyledButton onClick={onAddNewTask}>Add Task</StyledButton>
         </form>
     );
-
 };
 
 export default TaskForm;

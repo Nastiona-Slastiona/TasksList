@@ -6,6 +6,12 @@ import StyledInputCheckbox from "../UI/Input/styledInputCheckbox.js";
 import cl from './taskItem.module.css'
 
 const TaskItem = ({task, number}) => {
+  if(!task && !number) {
+    return (
+      <div>There is error in 'TaskItem' section</div>
+    );
+  }
+
   const dispatch = useDispatch();
 
   const onDeleteClick = event => {
@@ -15,18 +21,17 @@ const TaskItem = ({task, number}) => {
   )};
 
   return (
-      <div className={cl.task}>
-        <div className={cl.taskTitle}>
-          <strong 
-            style={{
-              textDecoration: task.completed 
-              ? 'line-through': 'none',
-              color: task.color  
-            }}
-          >
-            {number}. {task.title}
-          </strong>
-        <div className={cl.taskBody}>
+    <div className={cl.taskItem}>
+      <div className={cl.taskItemText}>
+        <strong 
+          style={{
+            textDecoration: task.completed 
+            ? 'line-through': 'none',
+          }}
+        >
+          {number}. {task.title}
+        </strong>
+        <div className={cl.taskItemBody}>
           {task.body}
         </div>
       </div>
@@ -34,9 +39,7 @@ const TaskItem = ({task, number}) => {
         <StyledInputCheckbox task={task}/>
         <StyledButton onClick={onDeleteClick}>Delete</StyledButton>
       </div>
-
-
-      </div>
+    </div>
   );
 };
 

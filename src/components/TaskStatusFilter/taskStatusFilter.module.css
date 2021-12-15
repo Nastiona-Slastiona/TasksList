@@ -1,4 +1,4 @@
-.taskStatusContainer {
+.taskStatusFilterContainer {
   display: inline-flex;
 
   width: 30%;
@@ -6,7 +6,7 @@
 }
 
 @media (max-width: 700px) {
-  .taskStatusContainer {
+  .taskStatusFilterContainer {
     display: flex;
     margin-left: 30px;
   }

@@ -5,7 +5,7 @@ import cl from './taskStatusFilter.module.css';
 
 const TaskStatusFilter = () => {
     return (
-        <div className={cl.taskStatusContainer}>
+        <div className={cl.taskStatusFilterContainer}>
             <FilterButton status='all'> All </FilterButton>
             <FilterButton status='active'> Active </FilterButton>
             <FilterButton status='completed'> Completed </FilterButton>

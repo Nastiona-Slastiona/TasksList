@@ -1,4 +1,4 @@
-.task {
+.taskItem {
   display: flex;
   justify-content: space-between;
 
@@ -15,7 +15,7 @@
   box-shadow: 0 0 10px 5px rgba(149, 105, 136, 0.405);
 }
 
-.task:hover {
+.taskItem:hover {
   background: -webkit-linear-gradient(
     90deg,
     rgba(248, 246, 240, 0.808) 0%,
@@ -23,7 +23,7 @@
   );
 }
 
-.taskTitle {
+.taskItemText {
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 20px;
 
@@ -32,7 +32,7 @@
   color: #630330;
 }
 
-.taskBody {
+.taskItemBody {
   font-family: 'Times New Roman', Times, serif;
 
   display: flex;

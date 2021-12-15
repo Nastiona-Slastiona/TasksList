@@ -2,7 +2,6 @@ import React from "react";
 import classStyle from './modalWindow.module.css';
 
 const ModalWindow = ({children, visible, setVisible}) => {
-
     const rootClasses = [classStyle.modalWindow];
 
     if(visible) {

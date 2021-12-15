@@ -1,10 +1,16 @@
 import React from "react";
 import StyledInput from "../UI/Input/styledInput.js";
-import Selector from "../UI/select/selector.js";
+import Selector from "../UI/Select/selector.js";
 import TaskStatusFilter from "../TaskStatusFilter/taskStatusFilter.js";
 import classes from './taskFilter.module.css';
 
 const TaskFilter = ({filter, setFilter}) => {
+    if(!filter && !setFilter) {
+        return(
+            <div>Error in 'TaskFilter' Section</div>
+        );
+    }
+
     return (
         <div className={classes.taskFilterContainer}>
             <StyledInput 

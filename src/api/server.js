@@ -1,4 +1,3 @@
-import path from 'path';
 import qs from 'qs';
 import Express from 'express';
 import React from 'react';
@@ -19,10 +18,6 @@ app.use(handleRender)
 function handleRender(req, res) {
     const params = qs.parse(req.query);
     const store = createStore(tasksReducer);
-
-    // const preloadedState = { store.getS?tate };
-
-    // const store = createStore(tasksReducer, preloadedState);
 
     const html = renderToString(
         <Provider store={store}>
