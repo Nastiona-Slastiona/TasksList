@@ -4,7 +4,7 @@ import TaskList from './components/TaskList/taskList.js';
 import TaskForm from './components/TaskForm/taskForm.js';
 import TaskFilter from './components/TaskFilter/taskFilter.js';
 import ModalWindow from './components/UI/ModalWindow/modalWindow.js';
-import StyledButton from './components/UI/Button/styledButton.js';
+import CreateButton from './components/UI/Button/createButton.js';
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchTasks, selectAllTasks } from './features/Tasks/tasksSlice.js'
@@ -51,7 +51,7 @@ function App() {
 
   return (
     <div className="App">
-      <StyledButton style={{marginTop: 30}} onClick={() => setModal(true) }>Create task</StyledButton>
+      <CreateButton style={{marginTop: 30}} onClick={() => setModal(true) }>+</CreateButton>
       <ModalWindow visible={modal} setVisible={setModal}>
         <TaskForm />
       </ModalWindow>
@@ -60,6 +60,7 @@ function App() {
         filter={filter}
         setFilter={setFilter}  
       />
+       <hr className="separator"/>
       {status === 'loading' && <h2>Loading...</h2>}
       {error && <h2>An error occured: {error}</h2>}
       <TaskList tasks={sortedAndSearchedTasks} title={'List of tasks'}/>

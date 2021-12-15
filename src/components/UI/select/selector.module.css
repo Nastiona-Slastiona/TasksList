@@ -1,0 +1,11 @@
+.selector {
+  font-size: 20px;
+
+  text-align: center;
+
+  color: #630330;
+  border: 2px solid #630330;
+  border-radius: 15px;
+  background: -webkit-linear-gradient(90deg, #c2afc2 0%, #f8e5f8 100%)
+    transparent;
+}

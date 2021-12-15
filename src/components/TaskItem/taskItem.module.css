@@ -1,0 +1,37 @@
+.task {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 15px;
+  padding: 15px 10px;
+
+  border: 2px solid #630330;
+  border-radius: 30px;
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(250, 248, 240, 0.605) 0%,
+    rgba(255, 239, 169, 0.605) 100%
+  );
+  box-shadow: 0 0 10px 5px rgba(149, 105, 136, 0.405);
+}
+
+.task:hover {
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(248, 246, 240, 0.808) 0%,
+    rgba(255, 239, 169, 0.849) 100%
+  );
+}
+
+.taskTitle {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 20px;
+
+  width: 70%;
+
+  color: #630330;
+}
+
+.taskItemButtons {
+  display: flex;
+}

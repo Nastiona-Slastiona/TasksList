@@ -3,6 +3,7 @@ import StyledButton from "../UI/Button/styledButton.js";
 import { useDispatch } from "react-redux";
 import { deleteTasks } from "../../features/Tasks/tasksSlice.js";
 import StyledInputCheckbox from "../UI/Input/styledInputCheckbox.js";
+import cl from './taskItem.module.css'
 
 const TaskItem = ({task, number}) => {
   const dispatch = useDispatch();
@@ -14,8 +15,8 @@ const TaskItem = ({task, number}) => {
   )};
 
   return (
-      <div className="task">
-        <div className="task__content">
+      <div className={cl.task}>
+        <div className={cl.taskTitle}>
           <strong 
             style={{
               textDecoration: task.completed 
@@ -29,7 +30,7 @@ const TaskItem = ({task, number}) => {
           {task.body}
         </div>
       </div>
-      <div className="task__button-list">
+      <div className={cl.taskItemButtons}>
         <StyledInputCheckbox task={task}/>
         <StyledButton onClick={onDeleteClick}>Delete</StyledButton>
       </div>

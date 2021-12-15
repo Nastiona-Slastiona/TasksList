@@ -1,21 +1,26 @@
-.styledButton {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 10px;
-  font-size: 14px;
+.createButtonContainer {
+  display: flex;
+  justify-content: center;
+}
 
-  margin: 0 10px 10px;
-  padding: 5px 15px;
+.createButton {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 30px;
+
+  width: 50px;
+  margin: 10px;
+  padding-bottom: 10px;
 
   cursor: pointer;
   text-transform: uppercase;
 
   color: #fffddc;
   border: 2px solid #630330;
-  border-radius: 20px;
+  border-radius: 50%;
   background: -webkit-linear-gradient(90deg, #974797 0%, #d8bfd8 100%)
     transparent;
 }
 
-.styledButton:hover {
+.createButton:hover {
   background: #b394b3;
 }
