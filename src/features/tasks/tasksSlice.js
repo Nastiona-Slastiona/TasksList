@@ -7,11 +7,7 @@ const StatusFilters = {
 };
 
 const initialState = {
-    tasksToDo : [
-        // {id:1, title: 'JavaScript', body: 'JavaScript - programming language', completed: true },
-        // {id:2, title: 'JavaScript2', body: 'JavaScript - programming language', completed: false },
-        // {id:3, title: 'JavaScript3', body: 'JavaScript - programming language', completed: false },
-    ],
+    tasksToDo : [],
     status: null,
     error: null,
     filter: {
@@ -24,6 +20,7 @@ export const addTask = createAsyncThunk(
     async function(todo, {rejectWithValue, dispatch}) {
         const task = {
             ...todo,
+            taskId: nanoid(),
             completed: false
         }
         try {
@@ -34,7 +31,6 @@ export const addTask = createAsyncThunk(
                 },
                 body: JSON.stringify(task)
             });
-    
             if (!response.ok) {
                 throw new Error('ServerError on Adding task');
             }
@@ -44,7 +40,6 @@ export const addTask = createAsyncThunk(
         } catch (error) {
             return rejectWithValue(error.message)
         }
-
     }
 )
 
@@ -59,7 +54,6 @@ export const fetchTasks = createAsyncThunk(
             }
     
             const data = await response.json();
-    
             return data;
         } catch (error) {
             return rejectWithValue(error.message)
@@ -69,7 +63,7 @@ export const fetchTasks = createAsyncThunk(
 
 export const deleteTasks = createAsyncThunk(
     'tasks/deleteTasks',
-    async function(id, {rejectWithValue, dispatch}) {
+    async function(task, {rejectWithValue, dispatch}) {
         try {
             const response = await fetch('https://jsonplaceholder.typicode.com/todos/${id}', {
                 method: 'DELETE',
@@ -79,7 +73,7 @@ export const deleteTasks = createAsyncThunk(
                 throw new Error('ServerError on Delete');
             }
     
-            dispatch(taskRemoved({id}));
+            dispatch(taskRemoved(task));
         } catch (error) {
             return rejectWithValue(error.message)
         }
@@ -140,10 +134,10 @@ const tasksSlice = createSlice({
             }
         },
         taskRemoved(state, action) {
-            const id = action.payload.id;
-            const taskToRemove = state.tasksToDo.find(t => t.id === id);
+            const taskToRemove = state.tasksToDo.find(t => t.taskId === action.payload.taskId);
+
             if(taskToRemove){
-                state.tasksToDo = state.tasksToDo.filter(t => t.id !== id);
+                state.tasksToDo = state.tasksToDo.filter(t => t.taskId !== action.payload.taskId);
                 return state;
             }
         },
@@ -164,7 +158,12 @@ const tasksSlice = createSlice({
         },
         [fetchTasks.fulfilled]: (state, action) => {
             state.status = 'resolved';
-            state.tasksToDo = action.payload;
+            const tasks = Object.assign(action.payload);
+            for (let key in tasks) {
+                tasks[key].body = 'nothing';
+                tasks[key].taskId = nanoid();
+            }
+            state.tasksToDo = tasks;
         },
         [fetchTasks.rejected]: setError,
         [deleteTasks.rejected]: setError,
@@ -172,7 +171,8 @@ const tasksSlice = createSlice({
     }
 });
 
-export const { taskAdded, taskRemoved, taskToggled, statusFilterChanged } = tasksSlice.actions;
+const {taskRemoved, taskAdded, taskToggled} = tasksSlice.actions;
+export const { statusFilterChanged } = tasksSlice.actions;
 
 export default tasksSlice.reducer;
 

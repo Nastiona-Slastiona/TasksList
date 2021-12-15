@@ -10,15 +10,21 @@ const TaskList = ({tasks, title}) => {
         );
     }
 
-    const renderedTasks = tasks.map((task,index) => (
-        <CSSTransition
-            key={task.id}
+    const renderedTasks = tasks.map((task, index) => {
+        let fieldName = 'taskId';
+        if(!task.taskId){
+            fieldName = 'id';
+        }
+
+        return (
+            <CSSTransition
+            key={task.taskId}
             timeout={500}
             classNames="task"
         >
-            <TaskItem number={index + 1} task={task} key={task.id}/>
+            <TaskItem number={index + 1} task={task} key={task.taskId}/>
         </CSSTransition>
-    ))
+    )})
 
     return (
         <section>

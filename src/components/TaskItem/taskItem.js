@@ -11,7 +11,7 @@ const TaskItem = ({task, number}) => {
   const onDeleteClick = event => {
     event.preventDefault();
     dispatch(
-      deleteTasks(task.id)
+      deleteTasks(task)
   )};
 
   return (
