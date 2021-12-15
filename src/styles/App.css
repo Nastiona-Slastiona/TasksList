@@ -11,8 +11,7 @@
 
   min-height: 100vh;
 
-  background: url('../../static/images/watercolor-5380352_960_720.jpg')
-    no-repeat;
+  background: url('../../style/watercolor-5380352_960_720.jpg') no-repeat;
   background-size: 100% 100%;
 }
 
