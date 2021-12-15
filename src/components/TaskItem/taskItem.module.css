@@ -32,6 +32,18 @@
   color: #630330;
 }
 
+.taskBody {
+  font-family: 'Times New Roman', Times, serif;
+
+  display: flex;
+
+  margin-left: 25px;
+  padding-left: 10px;
+
+  border-radius: 5px;
+  background-color: #e9c0d3;
+}
+
 .taskItemButtons {
   display: flex;
 }

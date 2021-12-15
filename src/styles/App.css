@@ -6,9 +6,10 @@
 
 #root {
   display: flex;
+  overflow-y: auto;
   justify-content: center;
 
-  height: 100vh;
+  min-height: 100vh;
 
   background: url('../../static/images/watercolor-5380352_960_720.jpg')
     no-repeat;
@@ -17,9 +18,9 @@
 
 .App {
   width: 800px;
-  min-height: auto;
+  min-height: fit-content;
   margin: 20px;
-  padding: 0 100px;
+  padding: 0 100px 20px;
 
   border-radius: 30px;
   background-color: rgba(255, 255, 255, 0.5);

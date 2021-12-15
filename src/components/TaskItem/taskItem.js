@@ -26,7 +26,7 @@ const TaskItem = ({task, number}) => {
           >
             {number}. {task.title}
           </strong>
-        <div>
+        <div className={cl.taskBody}>
           {task.body}
         </div>
       </div>
