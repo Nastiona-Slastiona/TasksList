@@ -1,0 +1,27 @@
+.modal-window {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  display: none;
+
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-window__content {
+  min-width: 250px;
+  padding: 25px;
+
+  border: 2px solid #fdffe0;
+  border-radius: 15px;
+  background: #974797;
+  background: -webkit-linear-gradient(90deg, #682f68 0%, #ca77ca 100%);
+}
+
+.modal-window--active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
