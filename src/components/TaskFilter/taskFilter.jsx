@@ -1,28 +1,32 @@
-import React from "react";
+import React, { useCallback } from "react";
+import PropTypes from "prop-types";
 
-import StyledInput from "../base/Input/input.jsx";
-import TaskFilterSelector from "../base/TaskFilterSelector/taskFilterSelector.jsx";
-import TaskStatusFilter from "../TaskStatusFilter/taskStatusFilter.jsx";
+import Input from "Components/base/Input/input.jsx";
+import TaskFilterSelector from "Components/base/TaskFilterSelector/taskFilterSelector.jsx";
+import TaskStatusFilter from "Components/TaskStatusFilter/taskStatusFilter.jsx";
 
 import './taskFilter.css';
 
 
-export default function TaskFilter({filter, setFilter}) {
+const TaskFilter = ({filter, setFilter}) => {
+    const onInputChange = useCallback(event => setFilter({...filter, searchQuery: event.target.value}), [filter])
+    const onFilterChange = useCallback(event => setFilter({...filter, selectedSort: event.target.value }), [filter])
+
     return (
         <div className={'task__filter-container'}>
             <hr className="task__filter-separator"/>
-            <StyledInput 
+            <Input 
                 value={filter.searchQuery}
-                onChange={event => setFilter({...filter, searchQuery: event.target.value})}
+                onChange={onInputChange}
                 placeholder="search for..."/>
             <div className="task__filter-selector-section">
                 <TaskFilterSelector
                     value={filter.selectedSort}
-                    onChange={selectedSort => setFilter({...filter, selectedSort: selectedSort })}
+                    onChange={onFilterChange}
                     defaultValue="Sort by"
                     options={[
-                        {value: 'title', name:'by name'},
-                        {value: 'body', name:'by description'}
+                        {value: 'title', name: 'by name'},
+                        {value: 'body', name: 'by description'}
                     ]}
                 />
                 <TaskStatusFilter/>
@@ -31,3 +35,10 @@ export default function TaskFilter({filter, setFilter}) {
         </div>
     )
 };
+
+TaskFilter.propTypes = {
+    filter: PropTypes.object,
+    setFilter: PropTypes.func
+}
+
+export default TaskFilter;

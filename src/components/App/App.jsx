@@ -1,31 +1,42 @@
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 
-import TaskList from '../TaskList/taskList.jsx';
-import TaskFilter from '../TaskFilter/taskFilter.jsx';
-import { fetchTasks, selectAllTasks } from '../../store/features/tasks/tasksSlice.jsx'
+import TaskList from 'Components/TaskList/taskList.jsx';
+import TaskFilter from 'Components/TaskFilter/taskFilter.jsx';
+import { fetchTasks, selectAllTasks } from 'Store/features/tasks/tasksSlice.jsx'
+import { StatusFilter } from 'Models/StatusFilter/statusFilter.jsx';
 
 import  './App.css';
-import AddTask from '../AddTask/addTask.jsx';
+import AddTask from 'Components/AddTask/addTask.jsx';
 
 
 export default function App() {
     const tasks = useSelector(selectAllTasks);
     const filterStatus = useSelector(state => state.tasks.filter.status);
     const [filter, setFilter] = useState({selectedSort:'', searchQuery: ''});
-    const [isModalVisible, setIsModalVisible] = useState(false);
     const dispatch = useDispatch();
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const setModalVisability = useCallback(() => {
+        setIsModalVisible(true);
+    });
+
+    const onClose = useCallback(() => 
+        setIsModalVisible(false)
+    );
+
+    const stayingVisible = useCallback(e => e.stopPropagation());
 
     const getVisibleTodos = useCallback((todos, taskFilter) => {
         switch (taskFilter) {
-            case 'active':
+            case StatusFilter.Active:
                 return todos.filter(t => !t.completed);
-            case 'completed':
+            case StatusFilter.Completed:
                 return todos.filter(t => t.completed);
             default:
                 return todos;
         }
-    },[tasks, filterStatus]);
+    }, [tasks, filterStatus]);
 
     const visibleTodos = getVisibleTodos(tasks, filterStatus);
 
@@ -44,20 +55,22 @@ export default function App() {
             .includes(filter.searchQuery.toLowerCase()));
     }, [filter.searchQuery, sortedTasks]);
 
-    const setModalVisability = useCallback(() => {
-        setIsModalVisible(true);
-    });
-
     useEffect(() => { dispatch(fetchTasks()); }, [dispatch]);
 
     return (
     <div className="App">
-        <AddTask isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} setModalVisability={setModalVisability}/>
+        <AddTask 
+            isModalVisible={isModalVisible} 
+            setModalVisability={setModalVisability} 
+            onClose={onClose} 
+            stayingVisible={stayingVisible}/>
         <TaskFilter 
             filter={filter}
             setFilter={setFilter}  
         />
-        <TaskList tasks={sortedAndSearchedTasks} title={'List of tasks'}/>
+        <TaskList 
+            tasks={sortedAndSearchedTasks} 
+            title={'List of tasks'}/>
     </div>
     );
 };

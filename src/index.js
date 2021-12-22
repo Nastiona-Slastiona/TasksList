@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import App from './components/App/App.jsx';
-import store from './store/store.jsx';
+import App from 'Components/App/App.jsx';
+import store from 'Store/store.jsx';
+
+import 'Src/styles/css/common.css';
 
 
 ReactDOM.render(

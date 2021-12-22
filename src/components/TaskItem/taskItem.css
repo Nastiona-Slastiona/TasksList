@@ -7,12 +7,18 @@
 
   border: 2px solid #630330;
   border-radius: 30px;
+  text-decoration: none;
   background: -webkit-linear-gradient(
     90deg,
     rgba(250, 248, 240, 0.605) 0%,
     rgba(255, 239, 169, 0.605) 100%
   );
   box-shadow: 0 0 10px 5px rgba(149, 105, 136, 0.405);
+}
+
+.task__item--done {
+  display: inline;
+  text-decoration: line-through;
 }
 
 .task__item:hover {
@@ -46,4 +52,10 @@
 
 .task__item-buttons {
   display: flex;
+}
+
+.input__checkbox {
+  width: 30px;
+  height: 30px;
+  margin: 0 10px;
 }

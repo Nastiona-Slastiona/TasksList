@@ -67,5 +67,13 @@ module.exports = {
 			use: generateStyleLoader('sass-loader')
 		  },
 		]
+	},
+	resolve: {
+		alias: {
+			Components: path.resolve(__dirname, 'src/components'),
+			Models: path.resolve(__dirname, 'src/models'),
+			Store: path.resolve(__dirname, 'src/store'),
+			Src: path.resolve(__dirname, 'src'),
+		}
 	}
 };

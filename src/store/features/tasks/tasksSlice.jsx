@@ -1,20 +1,17 @@
 import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
 
+import { StatusFilter }  from "Models/StatusFilter/statusFilter.jsx";
+import { StatusThunk }  from "Models/StatusThunk/statusThunk.jsx";
 
-const StatusFilters = {
-    All: 'all',
-    Active: 'active',
-    Completed: 'completed'
-};
 
 const initialState = {
     tasksToDo : [],
     status: null,
     error: null,
     filter: {
-        status: StatusFilters.All,
+        status: StatusFilter.All,
     } 
-} ;
+};
 
 export const addTask = createAsyncThunk(
     'tasks/addTask',
@@ -56,6 +53,7 @@ export const fetchTasks = createAsyncThunk(
             }
     
             const data = await response.json();
+            
             return data;
         } catch (error) {
             return rejectWithValue(error.message)
@@ -109,7 +107,7 @@ export const toggleTasks = createAsyncThunk(
 );
 
 const setError = (state, action) => {
-    state.status = 'rejected';
+    state.status = StatusThunk.Rejected;
     state.error = action.payload;
 };
 
@@ -155,11 +153,11 @@ const tasksSlice = createSlice({
     },
     extraReducers: {
         [fetchTasks.pending]: (state) => {
-            state.status = 'loading';
+            state.status = StatusThunk.Loading;
             state.error = null;
         },
         [fetchTasks.fulfilled]: (state, action) => {
-            state.status = 'resolved';
+            state.status = StatusThunk.Resolved;
             const tasks = Object.assign(action.payload);
             for (let key in tasks) {
                 tasks[key].body = 'nothing';
@@ -173,7 +171,7 @@ const tasksSlice = createSlice({
     }
 });
 
-const {taskRemoved, taskAdded, taskToggled} = tasksSlice.actions;
+const { taskRemoved, taskAdded, taskToggled } = tasksSlice.actions;
 
 export const { statusFilterChanged } = tasksSlice.actions;
 

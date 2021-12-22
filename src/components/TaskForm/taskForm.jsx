@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { addTask } from '../../store/features/tasks/tasksSlice.jsx';
-import StyledButton from '../base/Button/button.jsx';
-import StyledInput from '../base/Input/input.jsx';
+import { addTask } from 'Store/features/tasks/tasksSlice.jsx';
+import Button from 'Components/base/Button/button.jsx';
+import Input from 'Components/base/Input/input.jsx';
 
 
 export default function TaskForm() {
@@ -16,6 +16,7 @@ export default function TaskForm() {
 
     const onAddNewTask = (event) => {
         event.preventDefault();
+
         if (task.title && task.body) {
             dispatch(addTask(task));
         };
@@ -25,19 +26,19 @@ export default function TaskForm() {
 
     return (
         <form>
-            <StyledInput
+            <Input
                 value={task.title} 
                 onChange={onTitleChanged}
                 type='text' 
                 placeholder='Task Name'
             />
-            <StyledInput 
+            <Input 
                 value={task.body} 
                 onChange={onBodyChanged}
                 type='text' 
                 placeholder='Task Description'
             />
-            <StyledButton onClick={onAddNewTask}>Add Task</StyledButton>
+            <Button onClick={onAddNewTask}>Add Task</Button>
         </form>
     );
 };

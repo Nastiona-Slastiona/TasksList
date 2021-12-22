@@ -1,30 +1,30 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
+import classNames from "classnames";
+import PropTypes from "prop-types";
 
-import { deleteTasks } from "../../store/features/tasks/tasksSlice.jsx";
-import StyledButton from "../base/Button/button.jsx";
-import StyledInputCheckbox from "../base/Input/inputCheckbox.jsx";
+import { deleteTasks, toggleTasks } from "Store/features/tasks/tasksSlice.jsx";
+import Button from "Components/base/Button/button.jsx";
+import Input from "Components/base/Input/input.jsx";
 
 import './taskItem.css'
 
 
-export default function TaskItem({task, number}) {
+const TaskItem = ({task, number}) => {
 	const dispatch = useDispatch();
+	const doneTaskClassName = classNames({'task__item--done': task.completed});
 
-	const onDeleteClick = event => {
+	const onDeleteClick = useCallback(event => {
 		event.preventDefault();
 		dispatch(deleteTasks(task))
-	};
+	});
+
+	const onCheckedChange = useCallback(() => { dispatch(toggleTasks(task))});
 
 	return (
 	<div className={'task__item'}>
 		<div className={'task__item-text'}>
-			<strong 
-				style={{
-				textDecoration: task.completed 
-				? 'line-through': 'none',
-				}}
-			>
+			<strong className={doneTaskClassName}>
 				{number}. {task.title}
 			</strong>
 			<div className={'task__item-body'}>
@@ -32,9 +32,22 @@ export default function TaskItem({task, number}) {
 			</div>
 		</div>
 		<div className={'task__item-buttons'}>
-			<StyledInputCheckbox task={task}/>
-			<StyledButton onClick={onDeleteClick}>Delete</StyledButton>
+			<Input 
+				task={task}
+				type={'checkbox'}
+				onChange={onCheckedChange}
+				checked={task.completed}
+				className={'input__checkbox'}
+			/>
+			<Button onClick={onDeleteClick}>Delete</Button>
 		</div>
 	</div>
 	);
 };
+
+TaskItem.propTypes = {
+	task: PropTypes.object,
+	number: PropTypes.number
+}
+
+export default TaskItem;

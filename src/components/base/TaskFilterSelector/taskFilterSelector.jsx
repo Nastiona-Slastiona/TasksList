@@ -1,22 +1,14 @@
-import React from "react";
+import React, { useCallback } from "react";
+import PropTypes from "prop-types";
 
 import "./taskFilterSelector.css";
 
 
-export default function TaskFilterSelector({options, defaultValue, value, onChange}) {
-    if (!options 
-        && !defaultValue 
-        && !value 
-        && !onChange) {
-        return (
-            <div>There is problem in the Selector section</div>
-        );
-    }
-
+const TaskFilterSelector = ({options, defaultValue, value, onChange}) => {
     return (
         <select 
             value={value}
-            onChange={event => onChange(event.target.value)}
+            onChange={onChange}
             className={'task__filter-selector'}
         >
             <option disabled value="">{defaultValue}</option>
@@ -28,3 +20,12 @@ export default function TaskFilterSelector({options, defaultValue, value, onChan
         </select>
     );
 };
+
+TaskFilterSelector.propTypes = {
+    options: PropTypes.array,
+    defaultValue: PropTypes.string,
+    value: PropTypes.string,
+    onChange: PropTypes.func
+}
+
+export default TaskFilterSelector;

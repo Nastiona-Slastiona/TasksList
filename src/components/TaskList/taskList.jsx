@@ -1,18 +1,21 @@
 import React from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { useSelector } from "react-redux";
+import PropTypes from 'prop-types';
 
-import TaskItem from "../TaskItem/taskItem.jsx";
+import TaskItem from "Components/TaskItem/taskItem.jsx";
+import { StatusThunk } from "Models/StatusThunk/statusThunk.jsx"
 
 import './taskList.css';
 
 
-export default function TaskList({tasks, title}) {    
+const TaskList = ({tasks, title}) => {    
     if (!tasks.length){
         return (
             <h1 className="task-list__header">The list is empty</h1>
         );
     }
+    
     const {status, error} = useSelector(state => state.tasks);
 
     const renderedTasks = tasks.map((task, index) => {
@@ -28,7 +31,7 @@ export default function TaskList({tasks, title}) {
 
     return (
         <section>
-            {status === 'loading' && <h2 className='task-list__header'>Loading...</h2>}
+            {status === StatusThunk.Loading && <h2 className='task-list__header'>Loading...</h2>}
             {error && <h2>An error occured: {error}</h2>}
             <h2 className='task-list__header'>{title}</h2>
             <TransitionGroup>
@@ -37,3 +40,10 @@ export default function TaskList({tasks, title}) {
         </section>
     );
 };
+
+TaskList.propTypes = {
+    task: PropTypes.object,
+    title: PropTypes.string
+}
+
+export default TaskList;

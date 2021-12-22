@@ -1,20 +1,3 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-#root {
-  display: flex;
-  overflow-y: auto;
-  justify-content: center;
-
-  min-height: 100vh;
-
-  background: url('../../../style/watercolor-5380352_960_720.jpg') no-repeat;
-  background-size: 100% 100%;
-}
-
 .App {
   width: 800px;
   min-height: fit-content;

@@ -1,12 +1,14 @@
 import React from "react";
+import classNames from "classnames";
 
 import './input.css';
 
 
-const Input = React.forwardRef((props, ref) => {
-    return (
-        <input ref={ref} {...props} className={'input'}/>
-    );
-});
+export default function Input(props) {
+    const className = classNames('input', 
+        {'input__checkbox': props.type == 'checkbox' })
 
-export default Input;
+    return (
+        <input {...props} className={className}/>
+    );
+};
