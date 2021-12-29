@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 
 import './createButton.css';
 
 
-export default function CreateButton({children, ...props}) {
+export default function CreateButton({ ...props }) {
     return (
-        <div className={'create-button__container'}>
-            <button {...props} className={'create-button'}>
-                {children}
+        <div className="create-button__container">
+            <button {...props} className="create-button">
+                +
             </button>
         </div>
     );
-};
+}

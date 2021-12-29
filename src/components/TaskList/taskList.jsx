@@ -1,22 +1,22 @@
-import React from "react";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { useSelector } from "react-redux";
+/* eslint-disable import/no-extraneous-dependencies */
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import TaskItem from 'components/TaskItem/taskItem';
+import ThunkStatus from 'models/thunkStatus';
 import PropTypes from 'prop-types';
-
-import TaskItem from "Components/TaskItem/taskItem.jsx";
-import { StatusThunk } from "Models/StatusThunk/statusThunk.jsx"
 
 import './taskList.css';
 
 
-const TaskList = ({tasks, title}) => {    
-    if (!tasks.length){
+function TaskList({ tasks, title }) {
+    if (!tasks.length) {
         return (
             <h1 className="task-list__header">The list is empty</h1>
         );
     }
-    
-    const {status, error} = useSelector(state => state.tasks);
+
+    const { status, error } = useSelector(state => state.tasks);
 
     const renderedTasks = tasks.map((task, index) => {
         return (
@@ -25,25 +25,25 @@ const TaskList = ({tasks, title}) => {
                 timeout={500}
                 classNames="task"
             >
-                <TaskItem number={index + 1} task={task} key={task.taskId}/>
+                <TaskItem key={task.taskId} number={index + 1} task={task} />
             </CSSTransition>
-    )})
+        );
+    });
 
     return (
         <section>
-            {status === StatusThunk.Loading && <h2 className='task-list__header'>Loading...</h2>}
+            {status === ThunkStatus.Loading && <h2 className="task-list__header">Loading...</h2>}
             {error && <h2>An error occured: {error}</h2>}
-            <h2 className='task-list__header'>{title}</h2>
+            <h2 className="task-list__header">{title}</h2>
             <TransitionGroup>
                 {renderedTasks}
             </TransitionGroup>
         </section>
     );
-};
+}
 
 TaskList.propTypes = {
-    task: PropTypes.object,
     title: PropTypes.string
-}
+};
 
 export default TaskList;

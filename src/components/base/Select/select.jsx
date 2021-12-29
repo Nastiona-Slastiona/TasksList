@@ -1,17 +1,17 @@
-import React, { useCallback } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
-import "./taskFilterSelector.css";
+import "./select.css";
 
 
-const TaskFilterSelector = ({options, defaultValue, value, onChange}) => {
+const Select = ({options, defaultValue, value, onChange}) => {
     return (
         <select 
             value={value}
             onChange={onChange}
-            className={'task__filter-selector'}
+            className={'select'}
         >
-            <option disabled value="">{defaultValue}</option>
+            <option disabled value={null}>{defaultValue}</option>
             {options.map(option =>
                 <option key={option.value} value={option.value}>
                     {option.name}
@@ -21,11 +21,11 @@ const TaskFilterSelector = ({options, defaultValue, value, onChange}) => {
     );
 };
 
-TaskFilterSelector.propTypes = {
+Select.propTypes = {
     options: PropTypes.array,
     defaultValue: PropTypes.string,
     value: PropTypes.string,
     onChange: PropTypes.func
 }
 
-export default TaskFilterSelector;
+export default Select;
