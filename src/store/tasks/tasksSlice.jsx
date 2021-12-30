@@ -40,7 +40,7 @@ const tasksSlice = createSlice({
         },
         [fetchTasks.fulfilled]: (state, action) => {
             state.status = ThunkStatus.Resolved;
-            const tasks = Object.assign(action.payload);
+            const tasks = [...action.payload];
 
             for (const key in tasks) {
                 tasks[key].body = 'nothing';
