@@ -1,0 +1,28 @@
+.task-list__header {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 40px;
+
+  text-align: center;
+
+  color: #630330;
+}
+
+.task-enter {
+  opacity: 0;
+}
+
+.task-enter-active {
+  transition: opacity 200ms ease-in;
+
+  opacity: 1;
+}
+
+.task-exit {
+  opacity: 1;
+}
+
+.task-exit-active {
+  transition: opacity 200ms ease-in;
+
+  opacity: 0;
+}

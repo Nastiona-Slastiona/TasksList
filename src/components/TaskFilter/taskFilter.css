@@ -1,0 +1,15 @@
+.task__filter-container {
+  display: block;
+
+  width: 100%;
+}
+
+.task__filter-select-section {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.task__filter-separator {
+  margin: 15px 0;
+}
