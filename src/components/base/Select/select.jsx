@@ -14,7 +14,7 @@ function Select({
             className="select"
             onChange={onChange}
         >
-            <option value={null} disabled>{defaultValue}</option>
+            <option value="" disabled>{defaultValue}</option>
             {
                 options.map(option => (
                     <option key={option.value} value={option.value}>

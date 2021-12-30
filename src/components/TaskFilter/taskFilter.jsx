@@ -9,6 +9,11 @@ import PropTypes from 'prop-types';
 import './taskFilter.css';
 
 
+const OPTIONS = [
+    { value: 'title', name: 'by name' },
+    { value: 'body', name: 'by description' }
+];
+
 function TaskFilter({ filter, setFilter }) {
     const onInputChange = useCallback(event => setFilter({ ...filter, searchQuery: event.target.value }), [filter]);
     const onFilterChange = useCallback(event => setFilter({ ...filter, selectedSort: event.target.value }), [filter]);
@@ -25,12 +30,7 @@ function TaskFilter({ filter, setFilter }) {
                 <Select
                     value={filter.selectedSort}
                     defaultValue="Sort by"
-                    options={
-                        [
-                            { value: 'title', name: 'by name' },
-                            { value: 'body', name: 'by description' }
-                        ]
-                    }
+                    options={OPTIONS}
                     onChange={onFilterChange}
                 />
                 <TaskStatusFilter />

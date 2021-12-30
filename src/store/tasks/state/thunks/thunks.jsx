@@ -17,7 +17,7 @@ export const addTask = createAsyncThunk(
 
         try {
             requestHelper
-                .post(task)
+                .post(task, 'getTasksUrl')
                 .then(addedTask => dispatch({ type: 'tasks/taskAdded', payload: addedTask }));
 
             return;
@@ -31,7 +31,7 @@ export const fetchTasks = createAsyncThunk(
     'tasks/fetchTasks',
     async (_, { rejectWithValue }) => {
         try {
-            const tasks = requestHelper.get(5);
+            const tasks = requestHelper.get(5, 'getLimittedTasksUrl');
 
             return tasks;
         } catch (error) {
@@ -44,7 +44,7 @@ export const removeTasks = createAsyncThunk(
     'tasks/removeTasks',
     async (task, { rejectWithValue, dispatch }) => {
         try {
-            requestHelper.delete(task);
+            requestHelper.delete(task, 'findByTaskIdUrl');
 
             dispatch({ type: 'tasks/taskRemoved', payload: task });
         } catch (error) {
@@ -58,7 +58,7 @@ export const toggleTasks = createAsyncThunk(
     async (task, { rejectWithValue, dispatch, getState }) => {
         const todo = getState().tasks.tasksToDo.find(t => t === task);
         try {
-            requestHelper.toggle(todo);
+            requestHelper.toggle(todo, 'findByTaskIdUrl');
 
             dispatch({ type: 'tasks/taskToggled', payload: todo });
         } catch (error) {

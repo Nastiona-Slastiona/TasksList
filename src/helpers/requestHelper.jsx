@@ -4,50 +4,63 @@ import urlHelper from 'src/helpers/urlHelper';
 
 
 const requestHelper = {
-    get: async amount => {
-        const tasks = await getRequest(
-            'getLimittedTasksUrl',
-            { tasksAmount: amount }
+    get: async (dataSize, url) => {
+        const options = {
+            method: 'GET'
+        };
+
+        const data = await getRequest(
+            url,
+            { size: dataSize },
+            options
         );
 
-        return tasks.json();
+        return data.json();
     },
-    post: async task => {
+    post: async (dataUnit, url) => {
         const options = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(task)
+            body: JSON.stringify(dataUnit)
         };
 
-        const tasks = await getRequest(
-            'getTasksUrl',
+        const data = await getRequest(
+            url,
             {},
             options
         );
 
-        return tasks.json();
+        return data.json();
     },
-    delete: async task => {
+    delete: async (dataUnit, url) => {
         const options = {
             method: 'DELETE'
         };
 
-        find(task, options);
+        await getRequest(
+            url,
+            { id: dataUnit.id },
+            options
+        );
     },
-    toggle: async task => {
+    toggle: async (dataUnit, url) => {
         const options = {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                completed: !task.completed
+                completed: !dataUnit.completed
             })
         };
 
-        find(task, options);
+        await getRequest(
+            url,
+            { id: dataUnit.id },
+            options
+        );
     }
 };
 
@@ -59,10 +72,8 @@ function errorHandler(response, methodName) {
 
 async function getRequest(
     urlTemplate,
-    parameters = {},
-    options = {
-        method: 'GET'
-    }
+    parameters,
+    options
 ) {
     const url = urlHelper.getUrlByTemplate(
         serviceUrls[urlTemplate],
@@ -73,14 +84,6 @@ async function getRequest(
     errorHandler(response, options.method);
 
     return response;
-}
-
-async function find(task, options) {
-    await getRequest(
-        'findByTaskIdUrl',
-        { id: task.id },
-        options
-    );
 }
 
 export default requestHelper;

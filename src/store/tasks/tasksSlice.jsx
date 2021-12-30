@@ -41,10 +41,12 @@ const tasksSlice = createSlice({
         [fetchTasks.fulfilled]: (state, action) => {
             state.status = ThunkStatus.Resolved;
             const tasks = Object.assign(action.payload);
+
             for (const key in tasks) {
                 tasks[key].body = 'nothing';
                 tasks[key].taskId = nanoid();
             }
+
             state.tasksToDo = tasks;
         },
         [fetchTasks.rejected]: setError,
