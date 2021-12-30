@@ -31,10 +31,7 @@ const tasksSlice = createSlice({
         taskAdded,
         taskToggled,
         taskRemoved,
-        filterStatusChanged,
-        addTask,
-        removeTasks,
-        toggleTasks
+        filterStatusChanged
     },
     extraReducers: {
         [fetchTasks.pending]: state => {

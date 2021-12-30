@@ -43,6 +43,7 @@ function TaskList({ tasks, title }) {
 }
 
 TaskList.propTypes = {
+    tasks: PropTypes.arrayOf(PropTypes.object),
     title: PropTypes.string
 };
 

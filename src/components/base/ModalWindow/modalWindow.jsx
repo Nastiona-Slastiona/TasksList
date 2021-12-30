@@ -27,9 +27,14 @@ function ModalWindow({
 }
 
 ModalWindow.propTypes = {
-    isVisible: PropTypes.bool,
-    onClose: PropTypes.func,
-    onModalClick: PropTypes.func
+    children: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.element,
+        PropTypes.node
+    ]),
+    isVisible: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    onModalClick: PropTypes.func.isRequired
 };
 
 export default ModalWindow;

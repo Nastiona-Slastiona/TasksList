@@ -130,6 +130,7 @@ module.exports = {
         'array-bracket-newline': ['error', 'consistent'],
         'no-case-declarations': 'off',
         'class-methods-use-this': 'off',
+        'guard-for-in': 'off',
         'arrow-body-style': 'off',
         'lines-between-class-members': 'off',
         'no-restricted-syntax': ['error', 'LabeledStatement', 'WithStatement'],

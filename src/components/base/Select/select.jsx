@@ -1,31 +1,36 @@
-import React from "react";
-import PropTypes from "prop-types";
+/* eslint-disable import/no-extraneous-dependencies */
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import "./select.css";
+import './select.css';
 
 
-const Select = ({options, defaultValue, value, onChange}) => {
+function Select({
+    options, defaultValue, value, onChange
+}) {
     return (
-        <select 
+        <select
             value={value}
+            className="select"
             onChange={onChange}
-            className={'select'}
         >
-            <option disabled value={null}>{defaultValue}</option>
-            {options.map(option =>
-                <option key={option.value} value={option.value}>
-                    {option.name}
-                </option>
-            )}
+            <option value={null} disabled>{defaultValue}</option>
+            {
+                options.map(option => (
+                    <option key={option.value} value={option.value}>
+                        {option.name}
+                    </option>
+                ))
+            }
         </select>
     );
-};
+}
 
 Select.propTypes = {
-    options: PropTypes.array,
-    defaultValue: PropTypes.string,
+    options: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+    defaultValue: PropTypes.string.isRequired,
     value: PropTypes.string,
-    onChange: PropTypes.func
-}
+    onChange: PropTypes.func.isRequired
+};
 
 export default Select;

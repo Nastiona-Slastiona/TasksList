@@ -41,8 +41,8 @@ function TaskFilter({ filter, setFilter }) {
 }
 
 TaskFilter.propTypes = {
-    filter: PropTypes.object,
-    setFilter: PropTypes.func
+    filter: PropTypes.object.isRequired,
+    setFilter: PropTypes.func.isRequired
 };
 
 export default TaskFilter;

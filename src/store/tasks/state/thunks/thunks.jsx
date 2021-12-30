@@ -1,8 +1,9 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable import/no-duplicates */
 /* eslint-disable consistent-return */
-/* eslint-disable no-template-curly-in-string */
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { nanoid } from '@reduxjs/toolkit';
+import requestHelper from 'src/helpers/requestHelper';
 
 
 export const addTask = createAsyncThunk(
@@ -15,21 +16,9 @@ export const addTask = createAsyncThunk(
         };
 
         try {
-            const response = await fetch('https://jsonplaceholder.typicode.com/todos/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(task)
-            });
-
-            if (!response.ok) {
-                throw new Error('ServerError on Adding task');
-            }
-
-            const beers = await response.json();
-
-            dispatch({ type: 'tasks/taskAdded', payload: beers });
+            requestHelper
+                .post(task)
+                .then(addedTask => dispatch({ type: 'tasks/taskAdded', payload: addedTask }));
 
             return;
         } catch (error) {
@@ -42,15 +31,9 @@ export const fetchTasks = createAsyncThunk(
     'tasks/fetchTasks',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=5');
+            const tasks = requestHelper.get(5);
 
-            if (!response.ok) {
-                throw new Error('ServerError');
-            }
-
-            const beers = await response.json();
-
-            return beers;
+            return tasks;
         } catch (error) {
             return rejectWithValue(error.message);
         }
@@ -61,15 +44,9 @@ export const removeTasks = createAsyncThunk(
     'tasks/removeTasks',
     async (task, { rejectWithValue, dispatch }) => {
         try {
-            const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${task.id}`, {
-                method: 'DELETE'
-            });
+            requestHelper.delete(task);
 
-            if (!response.ok) {
-                throw new Error('ServerError on Delete');
-            }
-
-            return dispatch({ type: 'tasks/taskRemoved', payload: task });
+            dispatch({ type: 'tasks/taskRemoved', payload: task });
         } catch (error) {
             return rejectWithValue(error.message);
         }
@@ -78,24 +55,12 @@ export const removeTasks = createAsyncThunk(
 
 export const toggleTasks = createAsyncThunk(
     'tasks/toggleTasks',
-    async (todo, { rejectWithValue, dispatch, getState }) => {
-        const task = getState().tasks.tasksToDo.find(t => t === todo);
+    async (task, { rejectWithValue, dispatch, getState }) => {
+        const todo = getState().tasks.tasksToDo.find(t => t === task);
         try {
-            const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${todo.id}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    completed: !task.completed
-                })
-            });
+            requestHelper.toggle(todo);
 
-            if (!response.ok) {
-                throw new Error('ServerError on Toggle');
-            }
-
-            return dispatch({ type: 'tasks/taskToggled', payload: todo });
+            dispatch({ type: 'tasks/taskToggled', payload: todo });
         } catch (error) {
             return rejectWithValue(error.message);
         }

@@ -7,7 +7,7 @@ import StatusFilter from 'models/statusFilter';
 import { fetchTasks } from 'store/tasks/state/thunks/thunks';
 import { selectAllTasks } from 'store/tasks/tasksSlice';
 
-import './App.css';
+import './app.css';
 
 
 export default function App() {
