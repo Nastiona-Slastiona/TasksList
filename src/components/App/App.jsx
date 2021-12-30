@@ -47,7 +47,7 @@ export default function App() {
     useEffect(() => { dispatch(fetchTasks()); }, [dispatch]);
 
     return (
-        <div className="App">
+        <div className="app">
             <AddTask />
             <TaskFilter
                 filter={filter}
